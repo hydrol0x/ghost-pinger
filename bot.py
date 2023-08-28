@@ -31,6 +31,7 @@ async def no_keyword(message):
             await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
 
 async def keyword_response(message):
+    print(message.content)
     if str(message.content) == bot.keyword:
         user = bot.get_user(bot.ghost_ping_user)
         mention_string = user.mention
