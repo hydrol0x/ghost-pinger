@@ -22,7 +22,7 @@ async def on_message(message):
 
         if str(message.author.id) == str(bot.ghost_ping_user):
             mention_string = message.author.mention
-            await message.channel.send('Hello! ' + mention_string, delete_after=0.5)
+            await message.channel.send('Hello! ' + mention_string, delete_after=bot.time_delay)
 
 @bot.slash_command()
 async def setuser(ctx, ghost_ping_user_id):
@@ -31,7 +31,7 @@ async def setuser(ctx, ghost_ping_user_id):
     bot.ghost_ping_user = ghost_ping_user_id 
 
 @bot.slash_command()
-async def setdelay(ctx, time_delay: int):
+async def setdelay(ctx, time_delay: float):
     try: 
         float(time_delay)
     except:
