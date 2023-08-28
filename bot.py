@@ -52,10 +52,10 @@ async def setdelay(ctx, time_delay: float):
     await ctx.respond(f"Set time delay for ghost ping deletion to {bot.time_delay}!")
 
 @bot.slash_command()
-async def setpingchannel(ctx, pingchannel_id:int):
+async def setpingchannel(ctx, pingchannel_id:str):
     await ctx.respond(f"Set channel where ping will happen to {pingchannel_id}!")
     
-    bot.pingchannel = pingchannel_id 
+    bot.pingchannel = int(pingchannel_id )
 
 
 bot.run(TOKEN)
