@@ -5,10 +5,10 @@ import random
 load_dotenv()  
 TOKEN = os.getenv("BOT_TOKEN")
 
-
 import discord
-
-bot = discord.Bot(intents=discord.Intents(message_content=True))
+intents = discord.Intents.default()
+intents.message_content = True
+bot = discord.Bot(intents=intents)
 
 bot.ghost_ping_user = ""
 bot.pingchannel = None
@@ -32,11 +32,10 @@ async def no_keyword(message):
             await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
 
 async def keyword_response(message):
-    print("keyword response")
-    print(f"message content {message.content}")
-    print(f"bot kw {bot.keyword}")
     if str(message.content) == str(bot.keyword):
-        user = bot.get_user(bot.ghost_ping_user)
+        user = await bot.get_or_fetch_user(int(bot.ghost_ping_user))
+        print(bot.ghost_ping_user)
+        print(user)
         mention_string = user.mention
         response= responses[random.randint(0, len(responses)-1)]
         channel = bot.get_channel(bot.pingchannel)
@@ -48,12 +47,12 @@ async def keyword_response(message):
             
 @bot.event
 async def on_message(message):
-        if message.author == bot.user:
-            return
-        if not bot.keyword:
-            await no_keyword(message)
-            return
-        await keyword_response(message)
+    if message.author == bot.user:
+        return
+    if not bot.keyword:
+        await no_keyword(message)
+        return
+    await keyword_response(message)
 
 
 @bot.slash_command()
