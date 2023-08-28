@@ -38,10 +38,6 @@ async def keyword_response(message):
         print(user)
         mention_string = user.mention
         response= responses[random.randint(0, len(responses)-1)]
-        channel = bot.get_channel(bot.pingchannel)
-        if channel:
-            await channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
-            return
         await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
 
             
