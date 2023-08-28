@@ -82,5 +82,11 @@ async def setkeyword(ctx, keyword:str):
     
     bot.keyword =keyword 
 
+@bot.slash_command()
+async def resetkeyword(ctx):
+    await ctx.respond(f"Reset!")
+    
+    bot.keyword =None
+
 
 bot.run(TOKEN)
