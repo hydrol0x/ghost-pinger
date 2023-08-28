@@ -21,7 +21,7 @@ async def on_message(message):
 
         if str(message.author.id) == str(bot.ghost_ping_user):
             mention_string = message.author.mention
-            await message.channel.send('Hello! ' + mention_string)
+            await message.channel.send('Hello! ' + mention_string, delete_after=0.5)
 
 @bot.slash_command()
 async def setuser(ctx, ghost_ping_user_id):
