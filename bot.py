@@ -1,6 +1,7 @@
 import discord
 from dotenv import load_dotenv
 import os
+import random
 load_dotenv()  
 TOKEN = os.getenv("BOT_TOKEN")
 
@@ -10,6 +11,8 @@ import discord
 bot = discord.Bot()
 bot.ghost_ping_user = ""
 bot.time_delay = 0.5 
+
+responses = ["PING", "I hate you", "Loser", "L", "Who asked?", "When did I ask?", "OK", "LOL"]
 
 @bot.event
 async def on_ready():
@@ -22,7 +25,8 @@ async def on_message(message):
 
         if str(message.author.id) == str(bot.ghost_ping_user):
             mention_string = message.author.mention
-            await message.channel.send('Hello! ' + mention_string, delete_after=bot.time_delay)
+            response= responses[random.randint(0, len(responses)-1)]
+            await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
 
 @bot.slash_command()
 async def setuser(ctx, ghost_ping_user_id):
