@@ -42,8 +42,9 @@ async def setdelay(ctx, time_delay: float):
         await ctx.respond(f"Please enter a valid decimal number")
         return
 
-    await ctx.respond(f"Set time delay for ghost ping deletion to {time_delay}!")
-    bot.time_delay = time_delay 
+    time_delay = max(time_delay, 0)
+    bot.time_delay = min(time_delay, 10) 
+    await ctx.respond(f"Set time delay for ghost ping deletion to {bot.time_delay}!")
 
 
 bot.run(TOKEN)
