@@ -27,8 +27,8 @@ async def on_message(message):
         if str(message.author.id) == str(bot.ghost_ping_user):
             mention_string = message.author.mention
             response= responses[random.randint(0, len(responses)-1)]
-            if bot.pingchannel:
-                channel = bot.get_channel(bot.pingchannel)
+            channel = bot.get_channel(bot.pingchannel)
+            if channel:
                 await channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
                 return
             await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
@@ -52,7 +52,7 @@ async def setdelay(ctx, time_delay: float):
     await ctx.respond(f"Set time delay for ghost ping deletion to {bot.time_delay}!")
 
 @bot.slash_command()
-async def setpingchannel(ctx, pingchannel_id):
+async def setpingchannel(ctx, pingchannel_id:int):
     await ctx.respond(f"Set channel where ping will happen to {pingchannel_id}!")
     
     bot.pingchannel = pingchannel_id 
