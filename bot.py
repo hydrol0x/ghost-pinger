@@ -8,7 +8,8 @@ TOKEN = os.getenv("BOT_TOKEN")
 
 import discord
 
-bot = discord.Bot()
+bot = discord.Bot(intents=discord.Intents(message_content=True))
+
 bot.ghost_ping_user = ""
 bot.pingchannel = None
 bot.keyword = None
