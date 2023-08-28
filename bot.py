@@ -12,7 +12,7 @@ bot = discord.Bot()
 bot.ghost_ping_user = ""
 bot.time_delay = 0.5 
 
-responses = ["PING", "I hate you", "Loser", "L", "Who asked?", "When did I ask?", "OK", "LOL"]
+responses = ["PING", "I hate you", "Loser", "L", "Who asked?", "When did I ask?", "OK", "LOL", "ping"]
 
 @bot.event
 async def on_ready():
