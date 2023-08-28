@@ -31,15 +31,15 @@ async def no_keyword(message):
             await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
 
 async def keyword_response(message):
-        if str(message.author.id) == str(bot.ghost_ping_user):
-            if str(message.content) == bot.keyword:
-                mention_string = message.author.mention
-                response= responses[random.randint(0, len(responses)-1)]
-                channel = bot.get_channel(bot.pingchannel)
-                if channel:
-                    await channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
-                    return
-                await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
+    if str(message.content) == bot.keyword:
+        user = bot.get_user(bot.ghost_ping_user)
+        mention_string = user.mention
+        response= responses[random.randint(0, len(responses)-1)]
+        channel = bot.get_channel(bot.pingchannel)
+        if channel:
+            await channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
+            return
+        await message.channel.send(response + " "+  mention_string, delete_after=bot.time_delay)
 
             
 @bot.event
