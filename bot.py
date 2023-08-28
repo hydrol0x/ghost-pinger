@@ -9,6 +9,7 @@ import discord
 
 bot = discord.Bot()
 bot.ghost_ping_user = ""
+bot.time_delay = 0.5 
 
 @bot.event
 async def on_ready():
@@ -28,5 +29,17 @@ async def setuser(ctx, ghost_ping_user_id):
     await ctx.respond(f"Set user to be ghost pinged to {ghost_ping_user_id}!")
     
     bot.ghost_ping_user = ghost_ping_user_id 
+
+@bot.slash_command()
+async def setdelay(ctx, time_delay: int):
+    try: 
+        float(time_delay)
+    except:
+        await ctx.respond(f"Please enter a valid decimal number")
+        return
+
+    await ctx.respond(f"Set time delay for ghost ping deletion to {time_delay}!")
+    bot.time_delay = time_delay 
+
 
 bot.run(TOKEN)
